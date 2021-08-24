@@ -25,9 +25,9 @@ Route::put('tasks/{id}', 'TasksController@update');
 Route::delete('tasks/{id}', 'TasksController@destroy');
 Route::get('/', 'TasksController@index');
 Route::resource('tasks', 'TasksController');
+Route::get('tasks/{id}/copy', 'TasksController@copy');
 // index: showの補助ページ
 Route::get('tasks', 'TasksController@index')->name('tasks.index');
 Route::get('tasks/create', 'TasksController@create')->name('tasks.create');
 Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
-Route::resource('tasks', 'TasksController');
-Route::get('tasks/{id}/copy', 'TasksController@copy');
+
