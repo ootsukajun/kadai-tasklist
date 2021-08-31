@@ -45,12 +45,12 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         
-        $request->validate([]
-        'title' => 'required|max:10'
+        $request->validate([
+            'status' => 'required|max:10',
             'content' => 'required|max:10',
         ]);
          $task = new Task;
-         $message->title = $request->title;  
+         $task->status = $request->status;  
         $task->content = $request->content;
         $task->save();
 
@@ -100,12 +100,12 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
          $request->validate([
-             'title' => 'required|max:10', 
+             'status' => 'required|max:10', 
             'content' => 'required|max:10',
         ]);
          $task = Task::findOrFail($id);
         // メッセージを更新
-         $message->title = $request->title;   
+         $message->status = $request->status;   
         $task->content = $request->content;
         $task->save();
 
