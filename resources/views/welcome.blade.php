@@ -4,8 +4,7 @@
  @if (Auth::check())
         {{ Auth::user()->name }}
          <div class="col-sm-8">
-                {{-- 投稿フォーム --}}
-                @include('tasks.form')
+               
                 {{-- 投稿一覧 --}}
                 @include('tasks.tasks')
             </div>

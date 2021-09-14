@@ -44,6 +44,7 @@ class TasksController extends Controller
         return view('tasks.create', [
             'task' => $task,
         ]);
+         return redirect('/');
     }
 
     /**
@@ -66,7 +67,7 @@ class TasksController extends Controller
         ]);
 
         // 前のURLへリダイレクトさせる
-        return back();
+        
          /*$task = new Task;
          $task->status = $request->status;
         $task->content = $request->content;

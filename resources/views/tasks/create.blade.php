@@ -5,7 +5,8 @@
 
 <!-- ここにページ毎のコンテンツを書く -->
  <h1>タスク新規作成ページ</h1>
-
+ {{-- 投稿フォーム --}}
+                @include('tasks.form')
     <div class="row">
         <div class="col-6">
          <!--  <form method="POST" action="{{ route('tasks.store') }}">-->
@@ -25,4 +26,5 @@
        
         </div>
     </div>
+    
 @endsection
