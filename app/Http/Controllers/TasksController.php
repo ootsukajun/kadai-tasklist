@@ -70,10 +70,10 @@ class TasksController extends Controller
          /*$task = new Task;
          $task->status = $request->status;
         $task->content = $request->content;
-        $task->save();
+        $task->save();*/
 
         // トップページへリダイレクトさせる
-        return redirect('/');*/
+        return redirect('/');
     }
 
     /**
@@ -85,11 +85,13 @@ class TasksController extends Controller
     public function show($id)
     {
           $task = Task::findOrFail($id);
-
+ if (\Auth::id() === $task->user_id){
         // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
         ]);
+    }
+     return redirect('/');
     }
 
     /**
@@ -103,9 +105,13 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
 
         // メッセージ編集ビューでそれを表示
-        return view('tasks.edit', [
+        if (\Auth::id() === $task->user_id)
+        { 
+            return view('tasks.edit', [
             'task' => $task,
         ]);
+    }
+    return redirect('/'); 
     }
 
     /**
@@ -123,14 +129,14 @@ class TasksController extends Controller
         ]);
          $task = Task::findOrFail($id);
         // メッセージを更新
-         $task->status = $request->status;   
+        if (\Auth::id() === $task->user_id){ $task->status = $request->status;   
         $task->content = $request->content;
         $task->save();
-
+}
         // トップページへリダイレクトさせる
         return redirect('/');
-    }
-
+    
+}
     /**
      * Remove the specified resource from storage.
      *
@@ -139,14 +145,14 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-         $task = Task::findOrFail($id);
+         $task = \App\Task::findOrFail($id);
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
         if (\Auth::id() === $task->user_id) {
             $task->delete();
         }
 
         // 前のURLへリダイレクトさせる
-        return back();
+        return redirect('/');
         
     }
 }
